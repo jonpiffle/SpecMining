@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[pdftex]{hyperref}
+\title{EECS 493 Research Proposal}
+\author{Andrew Mason \and Jon Pfeil}
+\date{September 26, 2014}
+\begin{document}
+\maketitle
+\tableofcontents
+\pagebreak
+\section{Abstract}
+\section{Project Goals}
+\section{Tools}
+\subsection{Soot}
+% Info taken from: http://www.sable.mcgill.ca/soot/
+% and: http://www.sable.mcgill.ca/publications/papers/2011-6/11.cetus.soot.pdf
+Soot is a Java optimization framework, intended to be used as either a stand-alone tool to inspect class files, or to develop optimizations or transformations on Java byte code. Soot provides four different intermediate representations of Java byte code:
+\begin{itemize}
+    \item\textbf{Baf}: a streamlined representation of bytecode which is simple to manipulate.
+    \item\textbf{Jimple}: a typed 3-address intermediate representation suitable for optimization. This is the primary representation used by Soot.
+    \item\textbf{Shimple}: an SSA variation of Jimple.
+    \item\textbf{Grimp}: an aggregated version of Jimple suitable for decompilation and code inspection.
+\end{itemize}
+\subsection{Heros}
+\subsection{Jasmin}%not really sure what this does
+\subsection{Smali}%also not really sure about this one either
+\subsection{Parsemis}
+% From: https://www2.cs.fau.de/EN/research/zold/ParSeMiS/index.html
+ParSeMiS is the parallel and sequential mining suite from the Friedrich-Alexander Universit{\"a}t Erlangen-N{\"u}remburg. It utilizes parallel or specialized algorithms or heuristics to search for frequent, interesting substructures in graph datasets.
+\subsection{JPDG}
+\section{Data Sources}
+\end{document}
