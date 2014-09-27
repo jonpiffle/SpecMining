@@ -13,13 +13,26 @@
 \maketitle
 \tableofcontents
 \pagebreak
-\section{Abstract}
-\section{Project Goals}
-\begin{itemize}
+\section{Related Work}
+\section{Proposed Work}
+The goal of this project is to push forward the state of specification mining research. This will be done by applying frequent subgraph mining algorithms to Program Dependency Graphs that are generated via \hyperref[subsection:JPDG]{JPDG} run on java source code. There are two measures of success for this goal:
+
+\begin{enumerate}
+    \item Improve upon the speed of FSM PDG's with a baseline given by gSpan
+    \item Increase the number of non-trivial specifications mined over baseline specification mining systems.
+\end{enumerate}
+
+To accomplish these goals, the specific work items must be done:
+
+\begin{enumerate}
     \item Get a working implementation of \hyperref[subsection:JPDG]{JPDG} to generate PDGs from Java source code.
-    \item Get a working implementation of the gSpan algorithm and apply it out-of-box to PDGs generate from JPDG.
-    \item Expand the state of research for specification mining with frequent subgraph mining algorithms on novel intermediate representations of Java code.
-\end{itemize}
+    \item Get a working implementation of the gSpan algorithm and apply it out-of-box to PDGs generated with JPDG.
+    \item Implement baseline specification mining systems
+    \item Setup a testing framework to compare the speed of our mining algorithms and the number of non-trivial specifications mined
+    \item Experiment with novel intermediate representations that will allow for specification mining across various levels of abstraction. Score the results according to the testing framework
+\end{enumerate}
+
+\section{Methodology and Evaluation}
 \section{Tools and Data Sources}
 \subsection{Soot}
 % Info taken from: http://www.sable.mcgill.ca/soot/
