@@ -1,3 +1,4 @@
 # Ignore all the LaTeX crap
 proposal.*
 !proposal.tex
+!proposal.bib

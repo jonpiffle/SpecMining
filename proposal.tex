@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
 \title{EECS 493 Research Proposal}
 \author{
     Andrew Mason\\
@@ -14,6 +15,8 @@
 \tableofcontents
 \pagebreak
 \section{Related Work}
+\subsection{gSpan}
+\subsection{HSFSM}
 \section{Proposed Work}
 The goal of this project is to push forward the state of specification mining research. This will be done by applying frequent subgraph mining algorithms to Program Dependency Graphs that are generated via \hyperref[subsection:JPDG]{JPDG} run on java source code. There are two measures of success for this goal:
 
@@ -22,7 +25,7 @@ The goal of this project is to push forward the state of specification mining re
     \item Increase the number of non-trivial specifications mined over baseline specification mining systems.
 \end{enumerate}
 
-To accomplish these goals, the specific work items must be done:
+\noindent To accomplish these goals, the specific work items must be done:
 
 \begin{enumerate}
     \item Get a working implementation of \hyperref[subsection:JPDG]{JPDG} to generate PDGs from Java source code.
@@ -35,9 +38,7 @@ To accomplish these goals, the specific work items must be done:
 \section{Methodology and Evaluation}
 \section{Tools and Data Sources}
 \subsection{Soot}
-% Info taken from: http://www.sable.mcgill.ca/soot/
-% and: http://www.sable.mcgill.ca/publications/papers/2011-6/11.cetus.soot.pdf
-Soot is a Java optimization framework, intended to be used as either a stand-alone tool to inspect class files, or to develop optimizations or transformations on Java byte code. Soot provides several different intermediate representations of Java byte code:
+Soot is a Java optimization framework, intended to be used as either a stand-alone tool to inspect class files, or to develop optimizations or transformations on Java byte code. Soot provides several different intermediate representations of Java byte code: \cite{lam11:_soot_java}
 \begin{itemize}
     \item\textbf{Baf}: a streamlined representation of bytecode which is simple to manipulate.
     \item\textbf{Jimple}: a typed 3-address intermediate representation suitable for optimization. This is the primary representation used by Soot.
@@ -45,11 +46,13 @@ Soot is a Java optimization framework, intended to be used as either a stand-alo
     \item\textbf{Grimp}: an aggregated version of Jimple suitable for decompilation and code inspection.
     \item\textbf{Dava}: an abstract syntax tree-based representation. Produced via decompilation of the Jimple representation.
 \end{itemize}
-Intraprocedurally, the Soot framework is often used for its support for implementing intraprocedural data-flow analyses. Soot also provides call graph information for interprocedural analysis as part of its output.
+Intraprocedurally, the Soot framework is often used for its support for implementing intraprocedural data-flow analyses. Soot also provides call graph information for interprocedural analysis as part of its output. \cite{lam11:_soot_java}
 \subsection{Heros}
 Heros is a an interprocedural, finite, distributive subset (IFDS) problem solving framework, that can be plugged into Java-based program analysis frameworks, like Soot.
-\subsection{Jasmin}%not really sure what this does
-\subsection{Smali}%also not really sure about this one either
+\subsection{Jasmin}
+Jasmin is a back end for the Soot framework. It is used to compile Soot from source.
+\subsection{Smali}
+Smali is an assembler and disassembler for the JVM. Additonally, it fully supports the full functionality of the dex format (Android executable files).
 \subsection{Parsemis}
 % From: https://www2.cs.fau.de/EN/research/zold/ParSeMiS/index.html
 ParSeMiS is the parallel and sequential mining suite from the Friedrich-Alexander Universit{\"a}t Erlangen-N{\"u}remburg. It utilizes parallel or specialized algorithms or heuristics to search for frequent, interesting substructures in graph datasets.
@@ -57,4 +60,8 @@ ParSeMiS is the parallel and sequential mining suite from the Friedrich-Alexande
 \label{subsection:JPDG}
 JPDG is a tool developed by Tim Henderson which utilizes the Soot framework to generate procedure dependence graphs (PDGs) for Java programs. The PDGs can then be mined for frequent subgraphs to infer programming rules from source code.
 \subsection{Google Code}
+We will be using a collection of thousands of Java programs collected from Google Code by Tim Henderson for evaluating our research.
+\pagebreak
+\bibliographystyle{plain}
+\bibliography{proposal}
 \end{document}
