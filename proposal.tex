@@ -14,14 +14,20 @@
 \maketitle
 \tableofcontents
 \pagebreak
+
 \section{Related Work}
 \subsection{gSpan}
 gSpan is an algorithm for frequent graph-based pattern mining. It explores depth-first  search (DFS) in frequent subgraph mining using a DFS lexicographical ordering and minimum DFS codes, which form a canonical labeling system to support the DFS search \cite{Yan:2002:GGS:844380.844811}. The algorithm exploits the fact that, given a set of DFS codes for a graph, two graphs are isomorphic if and only if they have the same minimum DFS code.
+
 \subsection{GMFMM and IHMM}
-GMFMM and IHMM are two algorithms proposed by Chang and Podgurski for discovering both intraprocedural and interprocedural program dependencies. The algorithms model rules as graph minors of augmented dependence graphs, with edes to indicate shared data dependencies \cite{DBLP:journals/smr/ChangP12}.\\
-\indent The first, GMFMM, is a greedy algorithm for rule discovery by mining maximal frequent minors from interprocedural dependence spheres \cite{DBLP:journals/smr/ChangP12}. The algorithm operates in two phases - the first finds nodes in frequent minors, and the second makes those frequent minors maximal by adding additional dependencies to the graph.\\
-\indent IHMM is the incremental heuristic minor matching algorithm, which discovers violations of rules, even if those instances are interprocedural. Given a user-specified key node \textit{n} (usually a call-site node), IHMM searches \textit{n}'s base function and, if necessary, any ancestors of the base function to identify rule violations involving \textit{n} \cite{DBLP:journals/smr/ChangP12}. IHMM also uses dependence spheres for finding correct instances and violations of programming rules. If IHMM cannot find a correct instance of the rule at the base function (by looking for an isomorphic minor), it looks to the ancestor functions, where it decides that a dependence sphere \textit{S} contains a violation if the number of super-spheres containing no rule instance is greater than some user-specified threshold \cite{DBLP:journals/smr/ChangP12}.\\
-\indent These algorithms are limited in that they will not detect rules whose elements are not connected by a data, control, or shared data dependency. The algorithms are also limited to looking within a given size bound for the dependence sphere \cite{DBLP:journals/smr/ChangP12}.
+GMFMM and IHMM are two algorithms proposed by Chang and Podgurski for discovering both intraprocedural and interprocedural program dependencies. The algorithms model rules as graph minors of augmented dependence graphs, with edes to indicate shared data dependencies \cite{DBLP:journals/smr/ChangP12}.
+
+The first, GMFMM, is a greedy algorithm for rule discovery by mining maximal frequent minors from interprocedural dependence spheres \cite{DBLP:journals/smr/ChangP12}. The algorithm operates in two phases - the first finds nodes in frequent minors, and the second makes those frequent minors maximal by adding additional dependencies to the graph.
+
+IHMM is the incremental heuristic minor matching algorithm, which discovers violations of rules, even if those instances are interprocedural. Given a user-specified key node \textit{n} (usually a call-site node), IHMM searches \textit{n}'s base function and, if necessary, any ancestors of the base function to identify rule violations involving \textit{n} \cite{DBLP:journals/smr/ChangP12}. IHMM also uses dependence spheres for finding correct instances and violations of programming rules. If IHMM cannot find a correct instance of the rule at the base function (by looking for an isomorphic minor), it looks to the ancestor functions, where it decides that a dependence sphere \textit{S} contains a violation if the number of super-spheres containing no rule instance is greater than some user-specified threshold \cite{DBLP:journals/smr/ChangP12}.
+
+These algorithms are limited in that they will not detect rules whose elements are not connected by a data, control, or shared data dependency. The algorithms are also limited to looking within a given size bound for the dependence sphere \cite{DBLP:journals/smr/ChangP12}.
+
 \section{Proposed Work}
 The goal of this project is to push forward the state of specification mining research. This will be done by applying frequent subgraph mining algorithms to Program Dependency Graphs that are generated via \hyperref[subsection:JPDG]{JPDG} run on java source code. There are two measures of success for this goal:
 
@@ -33,14 +39,29 @@ The goal of this project is to push forward the state of specification mining re
 \noindent To accomplish these goals, the specific work items must be done:
 
 \begin{enumerate}
+    \item Complete literature surveys of specification mining and frequent subgraph mining.
     \item Get a working implementation of \hyperref[subsection:JPDG]{JPDG} to generate PDGs from Java source code.
     \item Get a working implementation of the gSpan algorithm and apply it out-of-box to PDGs generated with JPDG.
-    \item Implement baseline specification mining systems
-    \item Setup a testing framework to compare the speed of our mining algorithms and the number of non-trivial specifications mined
-    \item Experiment with novel intermediate representations that will allow for specification mining across various levels of abstraction. Score the results according to the testing framework
+    \item Implement baseline specification mining systems.
+    \item Setup a testing framework to compare the speed of our mining algorithms and the number of non-trivial specifications mined.
+    \item Experiment with novel intermediate representations that will allow for specification mining across various levels of abstraction.
 \end{enumerate}
 
 \section{Methodology and Evaluation}
+The following is an outline of the methodology we will use to evaluate our specification miner:
+
+\begin{enumerate}
+    \item Obtain a corpus of programs that already have their non-trivial specifications identified (this can be done by hand if we cannot obtain rights to a previously used data set)
+    \item Run gspan on the PDG generated by JPDG for each example program. Record the runtime as our speed baseline
+    \item Run multiple other specification miners on the program corpus. Record the number of non-trivial specifications mined by each miner on each example. These results will serve as our mining baselines
+    \item For each experimental specification miner we want to evaluate:
+    \begin{enumerate}
+        \item Run on each example in the program corpus
+        \item Record the runtime
+        \item Record the number of non-trivial specifications mined
+    \end{enumerate}
+\end{enumerate}
+
 \section{Tools and Data Sources}
 \subsection{Soot}
 Soot is a Java optimization framework, intended to be used as either a stand-alone tool to inspect class files, or to develop optimizations or transformations on Java byte code. Soot provides several different intermediate representations of Java byte code: \cite{lam11:_soot_java}
@@ -52,20 +73,27 @@ Soot is a Java optimization framework, intended to be used as either a stand-alo
     \item\textbf{Dava}: an abstract syntax tree-based representation. Produced via decompilation of the Jimple representation.
 \end{itemize}
 Intraprocedurally, the Soot framework is often used for its support for implementing intraprocedural data-flow analyses. Soot also provides call graph information for interprocedural analysis as part of its output. \cite{lam11:_soot_java}
+
 \subsection{Heros}
 Heros is a an interprocedural, finite, distributive subset (IFDS) problem solving framework, that can be plugged into Java-based program analysis frameworks, like Soot.
+
 \subsection{Jasmin}
 Jasmin is a back end for the Soot framework. It is used to compile Soot from source.
+
 \subsection{Smali}
 Smali is an assembler and disassembler for the JVM. Additonally, it fully supports the full functionality of the dex format (Android executable files).
+
 \subsection{Parsemis}
 % From: https://www2.cs.fau.de/EN/research/zold/ParSeMiS/index.html
 ParSeMiS is the parallel and sequential mining suite from the Friedrich-Alexander Universit{\"a}t Erlangen-N{\"u}remburg. It utilizes parallel or specialized algorithms or heuristics to search for frequent, interesting substructures in graph datasets.
+
 \subsection{JPDG}
 \label{subsection:JPDG}
 JPDG is a tool developed by Tim Henderson which utilizes the Soot framework to generate procedure dependence graphs (PDGs) for Java programs. The PDGs can then be mined for frequent subgraphs to infer programming rules from source code.
+
 \subsection{Google Code}
 We will be using a collection of thousands of Java programs collected from Google Code by Tim Henderson for evaluating our research.
+
 \pagebreak
 \bibliographystyle{plain}
 \bibliography{proposal}
