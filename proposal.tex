@@ -15,12 +15,24 @@
 \tableofcontents
 \pagebreak
 
-\section{Related Work}
+\section{Introduction}
+Software verification, the ability to prove the correctness of a piece of software \cite{FormalSoftwareVerification}, is an appealing approach to improving software quality. However, the requirement of having formal descriptions of correctness has prevented the widespread use of software verification \cite{MiningSpecifications}. \textit{Specification Mining}, as described in \cite{MiningSpecifications}, is the machine learning approach to discovering formal specifications for a program interface or an abstract data type. A specification mining tool would reduce the major barrier to program verification by automating the generation of formal specifications.
+
+Our project aims to push forward the current state of specification mining through the application of frequent subgraph mining algorithms to novel intermediate representations of programs.
+
+\section{Background}
+\subsection{Formal Verification}
+
+\subsection{Intermediate Representations}
+
+\subsection{Program Dependency Graphs}
+
 \subsection{gSpan}
 gSpan is an algorithm for frequent graph-based pattern mining. It explores depth-first  search (DFS) in frequent subgraph mining using a DFS lexicographical ordering and minimum DFS codes, which form a canonical labeling system to support the DFS search \cite{Yan:2002:GGS:844380.844811}. The algorithm exploits the fact that, given a set of DFS codes for a graph, two graphs are isomorphic if and only if they have the same minimum DFS code.
 
+\section{Related Work}
 \subsection{GMFMM and IHMM}
-GMFMM and IHMM are two algorithms proposed by Chang and Podgurski for discovering both intraprocedural and interprocedural program dependencies. The algorithms model rules as graph minors of augmented dependence graphs, with edes to indicate shared data dependencies \cite{DBLP:journals/smr/ChangP12}.
+GMFMM and IHMM are two algorithms proposed by Chang and Podgurski for discovering both intraprocedural and interprocedural program dependencies. The algorithms model rules as graph minors of augmented dependence graphs, with edges to indicate shared data dependencies \cite{DBLP:journals/smr/ChangP12}.
 
 The first, GMFMM, is a greedy algorithm for rule discovery by mining maximal frequent minors from interprocedural dependence spheres \cite{DBLP:journals/smr/ChangP12}. The algorithm operates in two phases - the first finds nodes in frequent minors, and the second makes those frequent minors maximal by adding additional dependencies to the graph.
 
@@ -32,7 +44,7 @@ These algorithms are limited in that they will not detect rules whose elements a
 The goal of this project is to push forward the state of specification mining research. This will be done by applying frequent subgraph mining algorithms to Program Dependency Graphs that are generated via \hyperref[subsection:JPDG]{JPDG} run on java source code. There are two measures of success for this goal:
 
 \begin{enumerate}
-    \item Improve upon the speed of FSM PDG's with a baseline given by gSpan
+    \item Improve upon the speed of frequent subgraph mining on program dependency graphs with a baseline given by gSpan
     \item Increase the number of non-trivial specifications mined over baseline specification mining systems.
 \end{enumerate}
 
