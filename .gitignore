@@ -2,3 +2,7 @@
 proposal.*
 !proposal.tex
 !proposal.bib
+lit_survey.*
+!lit_survey.tex
+!lit_survey.bib
+.DS_store
