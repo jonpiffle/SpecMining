@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[hidelinks]{hyperref}
 \usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{graphicx}
 \title{Literature Survey}
 \author{
     Andrew Mason\\
@@ -59,7 +60,31 @@ specification language to a programming language within a dedicated program
 logic, which mixes programs and logical statements, infusing program
 contstructs with logical ones in a single language
 \cite{DeductiveSoftwareVerification}.
+
 \section{Specification Mining}
+Formal software verification has the potential to replace testing as the
+standard method of verifying program correctness. However, formal program
+verifiers are limited in that they can only check specified properties.
+Additionally, authors Lo and Khoo claim that the difficulty in formulating a
+set of formal properties has contributed to the lack of widespread adoption in
+industry\cite{Lo_softwarespecification}. To solve this issue, the technique of
+specification mining aims to discover non-trivial properties or specifications
+in a software system to later be used by a program verifier.
+\\
+
+\noindent Several approaches to specification mining are described in the
+literature, the first of which is a machine learning approach outlined by
+Ammons et al. Their mining approach is based on program execution traces rather
+than static analysis of source code. Ammons et al argue that this approach is
+superior since the traces will only contain the feasible paths of execution.
+Additionally, basing the mining on program traces ensure that only correct
+execution paths are mined, thus preventing buggy paths from polluting the
+results of the mining\cite{Ammons:2002:MS:503272.503275}. Their miner extracts
+abstract scenarios from traces annotated with information about flow
+dependence, which are then fed into an automaton learner to learn the
+specifications. The workflow of the miner looks like
+\cite{Ammons:2002:MS:503272.503275}:\\
+\includegraphics{machine_learning_miner_workflow.png}
 \section{Code Clones}
 \section{GSpan}
 \subsection{Subgraph Isomorphism}
