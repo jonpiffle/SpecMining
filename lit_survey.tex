@@ -143,10 +143,36 @@ shown that code that is modified more frequently is more likely to contain
 defects, so the approach looks at information obtained from the version control
 system to determine the rate of what the authors call code churn
 \cite{Goues:2009:SMF:1532891.1532925}.
-\section{Code Clones}
-\section{gSpan}
-\subsection{Subgraph Isomorphism}
-\subsection{Frequent Subgraph Mining}
+
+\section{Graphical Specification Mining}
+Several techinques have been described in the literature that perform
+specification mining on an intermediate representation of the software known
+as a program dependence graph (PDG). A PDG combines the information contained
+in a data dependence graph and a control flow graph. For more information, see
+\cite{Ferrante:1987:PDG:24039.24041}.
+\\
+
+\noindent Yan and Han present an algorithm for mining frequent substructure
+patterns, which they call gSpan. The algorithm, given a graph dataset
+$D = \left\{ G_0, G_1, \ldots, G_n\right\}$, with $support(g)$ denoting the
+number of graphs in $D$ in which $g$ is a subgraph, finds all subgraphs $g$
+such that $support(g) \geq minSup$, where $minSup$ is a minimum support
+threshold, specified by the user\cite{Yan:2002:GGS:844380.844811}. It is
+important to note that the authors limit their discussion to frequent
+connected subgraphs only. At the heart of frequent subgraph mining is a
+subgraph isomorphism test, illustrated in the following diagram:\\
+\begin{center}
+\includegraphics[scale=0.5]{subgraph_isomorphism.png}
+\end{center}
+
+\noindent gSpan explores depth-first search (DFS) in frequent subgraph mining,
+introducing the concepts of DFS lexicographical ordering and a minimum DFS 
+code, which provide a canonical labeling system to support DFS searching during
+the mining. Definitions for these concepts can be found in
+\cite{Yan:2002:GGS:844380.844811}. The subgraph mining subroutine of the
+algorithm uses a recursive graph expansion strategy, growing the current
+subgraph by one edge at a time to find the largest possible subgraph which is
+still a frequent subgraph.
 \pagebreak
 \bibliographystyle{acm}
 \bibliography{lit_survey}
