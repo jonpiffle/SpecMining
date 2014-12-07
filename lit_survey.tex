@@ -81,12 +81,54 @@ Additionally, basing the mining on program traces ensure that only correct
 execution paths are mined, thus preventing buggy paths from polluting the
 results of the mining\cite{Ammons:2002:MS:503272.503275}. Their miner extracts
 abstract scenarios from traces annotated with information about flow
-dependence, which are then fed into an automaton learner to learn the
-specifications. The workflow of the miner looks like
+dependence, which are small sets of independent interactions. These scenarios
+are then fed into an automaton learner to learn the specifications. Ammons et
+al give two reasons for this approach. First, the scenarios are much smaller
+than the original traces, so the automaton learner learns the specifications
+much faster. Second, the sizes of the scenarios are bounded, which they argue
+make the specification mining tractable. The workflow of the miner looks like
 \cite{Ammons:2002:MS:503272.503275}:\\
 \includegraphics{machine_learning_miner_workflow.png}
+\\
+
+\noindent Lo and Khoo expand on the work of \cite{Ammons:2002:MS:503272.503275}
+by describing their work in automaton-based specification mining, as well as
+their work in mining Linear Temporal Logic (LTL) expressions and Live Sequence
+Charts (LSC), which are alternate formalisms for representing specifications
+\cite{Lo_softwarespecification}. Their approach also relies on execution traces
+of the program. Lo and Khoo improve on \cite{Ammons:2002:MS:503272.503275} by
+using a data mining approach that attempts to improve the quality of results,
+since Ammons et al rely on the notion that traces give strong hints about
+program rules, but do not really address the possibility that these traces may
+contain errors. To this end, Lo and Khoo add an accuracy metric to measure the
+performance of an automaton-based miner, which is measured by the notion of
+recall and precision. They define recall and precision as "the proportion of
+sentences in $S_{inf}$ that is accepted by $S_{orig}$ and the proportion of
+sentences in $S_{orig}$ that is accepted by $S_{inf}$ where $S_{orig}$ is the
+original specification and $S_{inf}$ is the inferred specification
+\cite{Lo_softwarespecification}." Next, the authors devise a framework they
+call SMArTIC that splits the specification mining task into four pipelined
+components. They claim that this improves the quality of the mining because it
+identifies and filters out erroneous traces early in the mining, and "the
+over-generalization that occurs at the learning stage can be mitigated by
+localization of the learning process to groups of related ... traces
+\cite{Lo_softwarespecification}."
+\\
+
+\noindent Lo and Khoo also discuss their work in LTL specification mining,
+which is one of the most commonly-accepted formalisms by standard verifiers.
+LTL expressions break automata-based specifications (which are global and
+often complex) into smaller pieces which express what the authors call
+strongly observed behavior or rules. To identify these rules, Lo and Khoo
+introduce the notions of support, which is the number of traces exhibiting the
+premise of the rule, and confidence, which is the likelihood of the premise of
+the rule to be followed by its consequence\cite{Lo_softwarespecification}.
+They employ a search space pruning strategy to mine these rules from the
+execution traces.
+
+\section{Limiting False Positives}
 \section{Code Clones}
-\section{GSpan}
+\section{gSpan}
 \subsection{Subgraph Isomorphism}
 \subsection{Frequent Subgraph Mining}
 \pagebreak
