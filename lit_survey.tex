@@ -127,6 +127,22 @@ They employ a search space pruning strategy to mine these rules from the
 execution traces.
 
 \section{Limiting False Positives}
+Le Goues and Weimer\cite{Goues:2009:SMF:1532891.1532925} claim that
+specification inference techniques suffer from 90-99\% false positive rates,
+and thus require a heavy burden of manual inspection, making these techniques
+impractical for most software projects. By defining the notion of code
+trustworthiness, they are able to achieve false positive rates of only 5\%.
+Their approach statically estimates the trustworthiness of each code fragment
+and then weights the contribution of each trace by its trustworthiness, which
+is determined by the trustworthiness of the fragments visited in the trace, in
+the actual specification mining\cite{Goues:2009:SMF:1532891.1532925}. The code
+trustworthiness is based on the notion that some code is more likely to be
+correct than others. Le Goues and Weimer estimate this likelihood by using the
+results of many studies in software engineering. For example, studies have
+shown that code that is modified more frequently is more likely to contain
+defects, so the approach looks at information obtained from the version control
+system to determine the rate of what the authors call code churn
+\cite{Goues:2009:SMF:1532891.1532925}.
 \section{Code Clones}
 \section{gSpan}
 \subsection{Subgraph Isomorphism}
