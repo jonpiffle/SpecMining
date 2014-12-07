@@ -102,17 +102,17 @@ since Ammons et al rely on the notion that traces give strong hints about
 program rules, but do not really address the possibility that these traces may
 contain errors. To this end, Lo and Khoo add an accuracy metric to measure the
 performance of an automaton-based miner, which is measured by the notion of
-recall and precision. They define recall and precision as "the proportion of
+recall and precision. They define recall and precision as ``the proportion of
 sentences in $S_{inf}$ that is accepted by $S_{orig}$ and the proportion of
 sentences in $S_{orig}$ that is accepted by $S_{inf}$ where $S_{orig}$ is the
 original specification and $S_{inf}$ is the inferred specification
-\cite{Lo_softwarespecification}." Next, the authors devise a framework they
+\cite{Lo_softwarespecification}.'' Next, the authors devise a framework they
 call SMArTIC that splits the specification mining task into four pipelined
 components. They claim that this improves the quality of the mining because it
-identifies and filters out erroneous traces early in the mining, and "the
+identifies and filters out erroneous traces early in the mining, and ``the
 over-generalization that occurs at the learning stage can be mitigated by
 localization of the learning process to groups of related ... traces
-\cite{Lo_softwarespecification}."
+\cite{Lo_softwarespecification}.''
 \\
 
 \noindent Lo and Khoo also discuss their work in LTL specification mining,
@@ -176,7 +176,7 @@ still a frequent subgraph.
 \\
 
 \noindent Yan and Han expand upon their work on gSpan in their paper
-"CloseGraph: Mining Closed Frequent Graph Patterns." They propose a new
+``CloseGraph: Mining Closed Frequent Graph Patterns.'' They propose a new
 algorithm which mines only closed frequent subgraph patterns, rather than all
 of them. A graph $g$ is closed if there exists no proper super-graph with the
 same support as $g$ \cite{Yan:2003:CMC:956750.956784}. This approach addresses
@@ -195,6 +195,9 @@ store previously discovered graphs to prune newly discovered non-closed graphs
 \cite{Yan:2003:CMC:956750.956784}. Finally, they show that CloseGraph can be
 used with minimal effort to mine other structures, including many other types
 of graphs (unlabeled, non-simple, directed, and disconnected) as well as trees.
+\\
+
+\noindent Frequent subgraph mining is an important problem in the field of specification mining, as these specifications can be modeled by graph minors of PDGs. Hence, mining the PDG for graph minors results in the discovery of program specifications. In their paper, ``Discovering program rules and violations by mining interprocedural dependencies,'' \cite{DBLP:journals/smr/ChangP12} Chang and Podgurski give an approach 
 \pagebreak
 \bibliographystyle{acm}
 \bibliography{lit_survey}
