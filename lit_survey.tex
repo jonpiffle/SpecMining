@@ -173,6 +173,28 @@ the mining. Definitions for these concepts can be found in
 algorithm uses a recursive graph expansion strategy, growing the current
 subgraph by one edge at a time to find the largest possible subgraph which is
 still a frequent subgraph.
+\\
+
+\noindent Yan and Han expand upon their work on gSpan in their paper
+"CloseGraph: Mining Closed Frequent Graph Patterns." They propose a new
+algorithm which mines only closed frequent subgraph patterns, rather than all
+of them. A graph $g$ is closed if there exists no proper super-graph with the
+same support as $g$ \cite{Yan:2003:CMC:956750.956784}. This approach addresses
+the issue in gSpan of the blowing up of frequent subgraphs. For example, an
+$n$-edge graph has at most $2^n$ subgraphs, which contribute no new
+information if they have the same support as the super-graph. Yan and Han
+postulate that their approach, CloseGraph, both drastically reduces the number
+of unnecessary graphs generated as well as significantly improves the
+efficiency of the mining\cite{Yan:2003:CMC:956750.956784}. Their algorithm
+makes use of some of the properties of gSpan, in particular DFS coding and
+lexicographical ordering, and the restriction of graph extensions to right-most
+extensions only, and defines the notion of equivalent occurence (see
+\cite{Yan:2003:CMC:956750.956784}) to provide conditions for early
+termination. Additionally, Yan and Han show that CloseGraph does not need to
+store previously discovered graphs to prune newly discovered non-closed graphs
+\cite{Yan:2003:CMC:956750.956784}. Finally, they show that CloseGraph can be
+used with minimal effort to mine other structures, including many other types
+of graphs (unlabeled, non-simple, directed, and disconnected) as well as trees.
 \pagebreak
 \bibliographystyle{acm}
 \bibliography{lit_survey}
