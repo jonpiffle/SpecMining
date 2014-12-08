@@ -1,0 +1,17 @@
+digraph G1 {
+    n10 [shape=rect, label="<Reader: void setFilename(java.lang.String)>-entry"];
+    n11 [shape=rect, label="r0 := @this: Reader"];
+    n12 [shape=rect, label="r1 := @parameter0: java.lang.String"];
+    n13 [shape=rect, label="r0.<Reader: java.lang.String filename> = r1"];
+    n14 [shape=rect, label="return"];
+    n11->n13 [label="ddg"];
+    n12->n13 [label="ddg"];
+    n10->n11 [label="cfg"];
+    n11->n12 [label="cfg"];
+    n12->n13 [label="cfg"];
+    n13->n14 [label="cfg"];
+    n10->n11 [label="cdg"];
+    n10->n12 [label="cdg"];
+    n10->n13 [label="cdg"];
+    n10->n14 [label="cdg"];
+}

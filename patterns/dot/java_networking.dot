@@ -1,0 +1,18 @@
+digraph G1 {
+n6 [shape=rect, label="$r4 = new java.net.ServerSocket"];
+n8 [shape=rect, label="r1 = $r4"];
+n9 [shape=rect, label="r2 = virtualinvoke r1.<java.net.ServerSocket: java.net.Socket accept()>()"];
+n10 [shape=rect, label="virtualinvoke r1.<java.net.ServerSocket: void close()>()"];
+n11 [shape=rect, label="$r5 = new java.io.PrintStream"];
+n12 [shape=rect, label="$r6 = virtualinvoke r2.<java.net.Socket: java.io.OutputStream getOutputStream()>()"];
+n13 [shape=rect, label="specialinvoke $r5.<java.io.PrintStream: void <init>(java.io.OutputStream)>($r6)"];
+n14 [shape=rect, label="virtualinvoke r2.<java.net.Socket: void close()>()"];
+n6->n8 [label="ddg"];
+n8->n9 [label="ddg"];
+n8->n10 [label="ddg"];
+n9->n12 [label="ddg"];
+n9->n14 [label="ddg"];
+n11->n13 [label="ddg"];
+n12->n13 [label="ddg"];
+
+}

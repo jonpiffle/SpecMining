@@ -1,0 +1,14 @@
+digraph G1 {
+    n15 [shape=rect, label="<Reader: java.lang.String toString()>-entry"];
+    n17 [shape=rect, label="$r1 = r0.<Reader: java.lang.String filename>"];
+    n16 [shape=rect, label="r0 := @this: Reader"];
+    n18 [shape=rect, label="return $r1"];
+    n17->n18 [label="ddg"];
+    n16->n17 [label="ddg"];
+    n15->n17 [label="cdg"];
+    n15->n16 [label="cdg"];
+    n15->n18 [label="cdg"];
+    n15->n16 [label="cfg"];
+    n17->n18 [label="cfg"];
+    n16->n17 [label="cfg"];
+}
