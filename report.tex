@@ -171,23 +171,23 @@ subgraph of B that is isomorphic to A):
 \end{center}
 
 \subsubsection{Frequent Subgraph Mining}
-pass % move some info from the gspan section into here
+Another fundamental technique in graphical specification mining is that of
+frequent subgraph mining. Given a graph dataset
+$D = \left\{ G_0, G_1, \ldots, G_n\right\}$, with $support(g)$ denoting the
+number of graphs in $D$ in which $g$ is a subgraph, frequent subgraph mining
+aims to find all subgraphs $g$ such that $support(g) \geq minSup$, where
+$minSup$ is some minimum support, usually specified by a user
+\cite{Yan:2002:GGS:844380.844811}. At the heart of frequent subgraph mining is
+the subgraph isomorphism test.
 
 \subsubsection{gSpan}
 \noindent Yan and Han present an algorithm for mining frequent substructure
-patterns, which they call gSpan. The algorithm, given a graph dataset
-$D = \left\{ G_0, G_1, \ldots, G_n\right\}$, with $support(g)$ denoting the
-number of graphs in $D$ in which $g$ is a subgraph, finds all subgraphs $g$
-such that $support(g) \geq minSup$, where $minSup$ is a minimum support
-threshold, specified by the user\cite{Yan:2002:GGS:844380.844811}. It is
-important to note that the authors limit their discussion to frequent
-connected subgraphs only. At the heart of frequent subgraph mining is a
-subgraph isomorphism test.
-
-\noindent gSpan explores depth-first search (DFS) in frequent subgraph mining,
-introducing the concepts of DFS lexicographical ordering and a minimum DFS 
-code, which provide a canonical labeling system to support DFS searching during
-the mining. Definitions for these concepts can be found in
+patterns, which they call gSpan. It is important to note that the authors
+limit their discussion to frequent connected subgraphs only. gSpan explores
+depth-first search (DFS) in frequent subgraph mining, introducing the concepts
+of DFS lexicographical ordering and a minimum DFS code, which provide a
+canonical labeling system to support DFS searching during the mining.
+Definitions for these concepts can be found in
 \cite{Yan:2002:GGS:844380.844811}. The subgraph mining subroutine of the
 algorithm uses a recursive graph expansion strategy, growing the current
 subgraph by one edge at a time to find the largest possible subgraph which is
