@@ -133,7 +133,7 @@ the rule to be followed by its consequence\cite{Lo_softwarespecification}.
 They employ a search space pruning strategy to mine these rules from the
 execution traces.
 
-\subsection{Limiting False Positives}
+\subsubsection{Limiting False Positives}
 Le Goues and Weimer\cite{Goues:2009:SMF:1532891.1532925} claim that
 specification inference techniques suffer from 90-99\% false positive rates,
 and thus require a heavy burden of manual inspection, making these techniques
@@ -152,6 +152,7 @@ system to determine the rate of what the authors call code churn
 \cite{Goues:2009:SMF:1532891.1532925}.
 
 \subsection{Graphical Specification Mining}
+\subsubsection{Program Dependence Graphs}
 Several techinques have been described in the literature that perform
 specification mining on an intermediate representation of the software known
 as a procedure dependence graph (PDG). A PDG combines the information contained
@@ -159,33 +160,41 @@ in a data dependence graph and a control flow graph. For more information, see
 \cite{Ferrante:1987:PDG:24039.24041}.
 
 \subsubsection{Subgraph Isomorphism}
-pass
-
-\subsubsection{gSpan}
-\noindent Yan and Han present an algorithm for mining frequent substructure
-patterns, which they call gSpan. The algorithm, given a graph dataset
-$D = \left\{ G_0, G_1, \ldots, G_n\right\}$, with $support(g)$ denoting the
-number of graphs in $D$ in which $g$ is a subgraph, finds all subgraphs $g$
-such that $support(g) \geq minSup$, where $minSup$ is a minimum support
-threshold, specified by the user\cite{Yan:2002:GGS:844380.844811}. It is
-important to note that the authors limit their discussion to frequent
-connected subgraphs only. At the heart of frequent subgraph mining is a
-subgraph isomorphism test, illustrated in the following diagram:\\
+Finding repeated patterns in the PDGs is central to the ideas behind graphical
+specification mining, and, therefore, so is the subgraph isomorphism problem.
+The subgraph isomorphism problem asks the question: given graphs $G$ and $H$,
+does there exist a subgraph $G_0$ of $G$ such that $G_0$ is isomorphic to $H$?
+Such an isomorphism is illustrated in the following diagram (C highlights the 
+subgraph of B that is isomorphic to A):
 \begin{center}
-\includegraphics[scale=0.5]{subgraph_isomorphism.png}
+\includegraphics{subgraph_isomorphism.png}
 \end{center}
 
-\noindent gSpan explores depth-first search (DFS) in frequent subgraph mining,
-introducing the concepts of DFS lexicographical ordering and a minimum DFS 
-code, which provide a canonical labeling system to support DFS searching during
-the mining. Definitions for these concepts can be found in
+\subsubsection{Frequent Subgraph Mining}
+Another fundamental technique in graphical specification mining is that of
+frequent subgraph mining. Given a graph dataset
+$D = \left\{ G_0, G_1, \ldots, G_n\right\}$, with $support(g)$ denoting the
+number of graphs in $D$ in which $g$ is a subgraph, frequent subgraph mining
+aims to find all subgraphs $g$ such that $support(g) \geq minSup$, where
+$minSup$ is some minimum support, usually specified by a user
+\cite{Yan:2002:GGS:844380.844811}. At the heart of frequent subgraph mining is
+the subgraph isomorphism test.
+
+\subsubsection{gSpan}
+Yan and Han present an algorithm for mining frequent substructure
+patterns, which they call gSpan. It is important to note that the authors
+limit their discussion to frequent connected subgraphs only. gSpan explores
+depth-first search (DFS) in frequent subgraph mining, introducing the concepts
+of DFS lexicographical ordering and a minimum DFS code, which provide a
+canonical labeling system to support DFS searching during the mining.
+Definitions for these concepts can be found in
 \cite{Yan:2002:GGS:844380.844811}. The subgraph mining subroutine of the
 algorithm uses a recursive graph expansion strategy, growing the current
 subgraph by one edge at a time to find the largest possible subgraph which is
 still a frequent subgraph.
 
 \subsubsection{CloseGraph}
-\noindent Yan and Han expand upon their work on gSpan in their paper
+Yan and Han expand upon their work on gSpan in their paper
 ``CloseGraph: Mining Closed Frequent Graph Patterns.'' They propose a new
 algorithm which mines only closed frequent subgraph patterns, rather than all
 of them. A graph $g$ is closed if there exists no proper super-graph with the
@@ -207,7 +216,14 @@ used with minimal effort to mine other structures, including many other types
 of graphs (unlabeled, non-simple, directed, and disconnected) as well as trees.
 \\
 
+\section{Previous Work}
+\subsection{Definitions}
+\subsubsection{Graph Minors}
+A graph $H$ is a minor of a graph $G$ if, by performing a series of edge and
+vertex deletions and edge contractions on $G$, $H$ can be produced from $G$.
+
 \subsubsection{Dependence Spheres}
+\subsection{GMFMM}
 \noindent Frequent subgraph mining is an important problem in the field of
 specification mining, as these specifications can be modeled by graph minors
 of PDGs. Hence, mining the PDG for graph minors results in the discovery of
@@ -222,10 +238,9 @@ values of functions. The authors define the notion of maximal frequent
 subgraphs to be those which are not contained in any other frequent subgraphs.
 Note that this notion is identical to the notion of a closed graph defined in
 \cite{Yan:2003:CMC:956750.956784}. Rather than mining all frequent subgraphs,
-the approach looks only for frequent minors (see
-\cite{DBLP:journals/smr/ChangP12} for a definition of a graph minor), which
-allows for certain variations in the structure of certain rules can be
-encompassed by a single rule.
+the approach looks only for frequent minors, which allows for certain
+variations in the structure of certain rules can be encompassed by a single
+rule.
 \\
 
 In order to mine for interprocedural rules, the authors give an approach for constructing a interprocuderal dependence sphere. The approach begins with the call-site graph (CSG), $S$, of the function of interest, $f_b$. Then, $S$ is grown iteratively by adding nodes from PDGs of functions in the call tree of $f_b$ if there exists a direct data dependency between the node and any node in $S$. See \cite{DBLP:journals/smr/ChangP12} for more details. Since Chang and Podgurski focus on the ordering and conditional rules unique to interprocedural analysis, they offer a method to reduce the resulting intereprocedural dependence sphere to include only call-site graph nodes and control point nodes. It is not difficult to extend the idea behind this reduction to limit the scope of the dependence sphere to any subset of node types that are of interest to the user in order to improve the efficiency of the mining algorithm.
