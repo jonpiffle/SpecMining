@@ -181,7 +181,7 @@ $minSup$ is some minimum support, usually specified by a user
 the subgraph isomorphism test.
 
 \subsubsection{gSpan}
-\noindent Yan and Han present an algorithm for mining frequent substructure
+Yan and Han present an algorithm for mining frequent substructure
 patterns, which they call gSpan. It is important to note that the authors
 limit their discussion to frequent connected subgraphs only. gSpan explores
 depth-first search (DFS) in frequent subgraph mining, introducing the concepts
@@ -194,7 +194,7 @@ subgraph by one edge at a time to find the largest possible subgraph which is
 still a frequent subgraph.
 
 \subsubsection{CloseGraph}
-\noindent Yan and Han expand upon their work on gSpan in their paper
+Yan and Han expand upon their work on gSpan in their paper
 ``CloseGraph: Mining Closed Frequent Graph Patterns.'' They propose a new
 algorithm which mines only closed frequent subgraph patterns, rather than all
 of them. A graph $g$ is closed if there exists no proper super-graph with the
@@ -219,6 +219,8 @@ of graphs (unlabeled, non-simple, directed, and disconnected) as well as trees.
 \section{Previous Work}
 \subsection{Definitions}
 \subsubsection{Graph Minors}
+A graph $H$ is a minor of a graph $G$ if, by performing a series of edge and
+vertex deletions and edge contractions on $G$, $H$ can be produced from $G$.
 
 \subsubsection{Dependence Spheres}
 \subsection{GMFMM}
@@ -236,10 +238,9 @@ values of functions. The authors define the notion of maximal frequent
 subgraphs to be those which are not contained in any other frequent subgraphs.
 Note that this notion is identical to the notion of a closed graph defined in
 \cite{Yan:2003:CMC:956750.956784}. Rather than mining all frequent subgraphs,
-the approach looks only for frequent minors (see
-\cite{DBLP:journals/smr/ChangP12} for a definition of a graph minor), which
-allows for certain variations in the structure of certain rules can be
-encompassed by a single rule.
+the approach looks only for frequent minors, which allows for certain
+variations in the structure of certain rules can be encompassed by a single
+rule.
 \\
 
 In order to mine for interprocedural rules, the authors give an approach for constructing a interprocuderal dependence sphere. The approach begins with the call-site graph (CSG), $S$, of the function of interest, $f_b$. Then, $S$ is grown iteratively by adding nodes from PDGs of functions in the call tree of $f_b$ if there exists a direct data dependency between the node and any node in $S$. See \cite{DBLP:journals/smr/ChangP12} for more details. Since Chang and Podgurski focus on the ordering and conditional rules unique to interprocedural analysis, they offer a method to reduce the resulting intereprocedural dependence sphere to include only call-site graph nodes and control point nodes. It is not difficult to extend the idea behind this reduction to limit the scope of the dependence sphere to any subset of node types that are of interest to the user in order to improve the efficiency of the mining algorithm.
