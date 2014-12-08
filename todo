@@ -1,0 +1,19 @@
+TODO
+======
+
+Jon:
+1. Introduction
+5. data source
+6. methodology and evaluation
+7. results
+8. conclusion
+
+
+Andrew:
+2.4.0 PDG
+2.4.1 Subgraph Isomorphism
+3. Previous Work
+3.1 Dependence Spheres
+Read his comments on last report to make sure everything is good
+4 Tools
+4.4 python-graph-tools http://graph-tool.skewed.de/ (used for finding subgraph isomorphisms)
