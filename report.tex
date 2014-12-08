@@ -372,7 +372,6 @@ A ``Non-trivial'' pattern is one that represents an actual specification, rather
 }
 \end{figure}
 
-
 Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph isomorphism search.
 
 \begin{figure}[ht]
@@ -380,7 +379,7 @@ Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph 
 \includegraphics[width=\linewidth]{patterns/networking_isomorphism_full.png}
 }
 \caption{\label{networking_isomorphism}
-    Highlighting socket pattern in Server.java PDG
+    Highlighting socket pattern in Server.java PDG (labels omitted)
 }
 \end{figure}
 
@@ -389,14 +388,48 @@ Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph 
 \includegraphics[width=\linewidth]{patterns/networking_isomorphism_zoomed.png}
 }
 \caption{\label{networking_isomorphism_zoomed}
-    Zooming in on highlighted socket pattern in Server.java PDG
+    Zooming in on highlighted socket pattern in Server.java PDG (labels omitted)
 }
 \end{figure}
 
 
 \subsection{Mining Trivial Patterns}
+There are many patterns that occur across a large percentage of our program corpus. These patterns are ``trivial'' in that they don't represent a program specification; rather, they represent common boilerplate java bytecode.
+
+In our test corpus, there were two patterns that were frequent patterns in over 50\% of projects. Looking at these patterns, we can clearly see that they represent a getter and setter.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=7cm]{patterns/reader_getter.png}
+}
+\caption{\label{reader_getter}
+    Getter pattern
+}
+\end{figure}
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=7cm]{patterns/reader_setter.png}
+}
+\caption{\label{reader_setter}
+    Setter pattern
+}
+\end{figure}
 
 \subsection{Removing Trivial Patterns}
+Revisiting the PDG for Reader.java, we can mark the getter and setter by doing a subgraph isomorphism search for each.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/reader_getter_isomorphism.png}
+}
+\caption{\label{reader_getter_isomorphism}
+    Highlighting getter pattern in Reader.java PDG (labels omitted)
+}
+\end{figure}
+
+Given that we now know what getter/setter patterns look like in java bytecode, we can filter them out from our pattern sets to reduce the number of trivial patterns we return. In fact, since these should always appear as disconnected subgraphs (unlike the socket pattern), we can remove them from future PDGs {\em before} running gSpan, thereby reducing our input size and reducing the number of trivial patterns.
+
 \subsection{Analysis}
 \begin{table}[ht]
 \resizebox{\textwidth}{!}{%
@@ -417,14 +450,9 @@ Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph 
 }
 \end{table}
 
-%\includegraphics{patterns/reader_getter.png}
-%\includegraphics{patterns/reader_setter.png}
+
 %\includegraphics{patterns/reader_getter_isomorphism.png}
 %\includegraphics{patterns/reader_setter_isomorphism.png}
-%\includegraphics{patterns/full_network.png}
-%\includegraphics{patterns/networking_pattern.png}
-%\includegraphics{patterns/networking_isomorphism_full.png}
-%\includegraphics{patterns/networking_isomorphism_zoomed.png}
 
 \section{Conclusion}
 pass
