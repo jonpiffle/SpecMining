@@ -160,7 +160,15 @@ in a data dependence graph and a control flow graph. For more information, see
 \cite{Ferrante:1987:PDG:24039.24041}.
 
 \subsubsection{Subgraph Isomorphism}
-pass
+Finding repeated patterns in the PDGs is central to the ideas behind graphical
+specification mining, and, therefore, so is the subgraph isomorphism problem.
+The subgraph isomorphism problem asks the question: given graphs $G$ and $H$,
+does there exist a subgraph $G_0$ of $G$ such that $G_0$ is isomorphic to $H$?
+Such an isomorphism is illustrated in the following diagram (C highlights the 
+subgraph of B that is isomorphic to A):
+\begin{center}
+\includegraphics{subgraph_isomorphism.png}
+\end{center}
 
 \subsubsection{Frequent Subgraph Mining}
 pass % move some info from the gspan section into here
@@ -174,10 +182,7 @@ such that $support(g) \geq minSup$, where $minSup$ is a minimum support
 threshold, specified by the user\cite{Yan:2002:GGS:844380.844811}. It is
 important to note that the authors limit their discussion to frequent
 connected subgraphs only. At the heart of frequent subgraph mining is a
-subgraph isomorphism test, illustrated in the following diagram:\\
-\begin{center}
-\includegraphics[scale=0.5]{subgraph_isomorphism.png}
-\end{center}
+subgraph isomorphism test.
 
 \noindent gSpan explores depth-first search (DFS) in frequent subgraph mining,
 introducing the concepts of DFS lexicographical ordering and a minimum DFS 
@@ -211,7 +216,12 @@ used with minimal effort to mine other structures, including many other types
 of graphs (unlabeled, non-simple, directed, and disconnected) as well as trees.
 \\
 
+\section{Previous Work}
+\subsection{Definitions}
+\subsubsection{Graph Minors}
+
 \subsubsection{Dependence Spheres}
+\subsection{GMFMM}
 \noindent Frequent subgraph mining is an important problem in the field of
 specification mining, as these specifications can be modeled by graph minors
 of PDGs. Hence, mining the PDG for graph minors results in the discovery of
