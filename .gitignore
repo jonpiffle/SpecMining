@@ -5,4 +5,6 @@ proposal.*
 lit_survey.*
 !lit_survey.tex
 !lit_survey.bib
+report.*
+!report.tex
 .DS_store
