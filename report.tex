@@ -274,7 +274,7 @@ pass
 Due to the large computation time for even moderately sized projects, a test data set of small toy-programs was chosen. Ten sections of example programs were chosen from \url{http://www.tutorialspoint.com/javaexamples/}, a website that hosts example java code showing how to use standard library features.
 
 \noindent The following sections were used:
-\begin{table}[h]
+\begin{table}[ht]
 \begin{tabular}{@{}ll@{}}
 \toprule
    & Topic           \\ \midrule
@@ -318,12 +318,77 @@ The following is an outline of the methodology we will use:
     \end{enumerate}
 \end{enumerate}
 
+\begin{figure}[ht]
+\centerline{
 \includegraphics[width=\linewidth]{spec_mining_methodology.png}
+}
+\caption{\label{mining_methodology}
+    Flowchart of methodology used
+}
+\end{figure}
 
 \section{Results}
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-\begin{table}[h]
+\subsection{Generating PDGs}
+Running the programs through jpdg produces Program Dependency Graphs as dot files. Since these are at the bytecode level, the PDGS are extremely large even for small projects. Below are examples of two PDGs, each generated from one file inside their respective projects. They are just shown to give a sense of scale, since they are too large for the text to be readable.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/reader_pdg_full.png}
+}
+\caption{\label{reader_pca}
+    PDG for Reader.java, a file in the File project
+}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/full_network_small.png}
+}
+\caption{\label{server_pdg}
+    PDG for Server.java, a file in the Networking project
+}
+\end{figure}
+
+\subsection{Mining Non-trivial Patterns}
+A ``Non-trivial'' pattern is one that represents an actual specification, rather than boilerplate java bytecode that will be included in most java projects. One of the examples used in previous specification mining literature is discovering the pattern of opening and closing sockets in network programming. We therefore expect that gSpan should be able to identify a pattern such as this in the Network project. Observing the patterns found in the Network program, we see that this is the case.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/networking_pattern.png}
+}
+\caption{\label{socket_pattern}
+    Frequent graph found in the Network project representing the socket open/close pattern
+}
+\end{figure}
+
+
+Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph isomorphism search.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/networking_isomorphism_full.png}
+}
+\caption{\label{networking_isomorphism}
+    Highlighting socket pattern in Server.java PDG
+}
+\end{figure}
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{patterns/networking_isomorphism_zoomed.png}
+}
+\caption{\label{networking_isomorphism_zoomed}
+    Zooming in on highlighted socket pattern in Server.java PDG
+}
+\end{figure}
+
+
+\subsection{Mining Trivial Patterns}
+
+\subsection{Removing Trivial Patterns}
+\subsection{Analysis}
+\begin{table}[ht]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -342,7 +407,6 @@ The following is an outline of the methodology we will use:
 }
 \end{table}
 
-%\includegraphics{patterns/reader_pdg_full.png}
 %\includegraphics{patterns/reader_getter.png}
 %\includegraphics{patterns/reader_setter.png}
 %\includegraphics{patterns/reader_getter_isomorphism.png}
