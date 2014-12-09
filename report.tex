@@ -96,7 +96,14 @@ than the original traces, so the automaton learner learns the specifications
 much faster. Second, the sizes of the scenarios are bounded, which they argue
 make the specification mining tractable. The workflow of the miner looks like
 \cite{Ammons:2002:MS:503272.503275}:\\
-\includegraphics{machine_learning_miner_workflow.png}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{machine_learning_miner_workflow.png}
+}
+\caption{\label{machine_learning_miner_workflow}
+    Workflow of machine learning specification miner
+}
+\end{figure}
 \\
 
 \noindent Lo and Khoo expand on the work of \cite{Ammons:2002:MS:503272.503275}
@@ -167,9 +174,14 @@ The subgraph isomorphism problem asks the question: given graphs $G$ and $H$,
 does there exist a subgraph $G_0$ of $G$ such that $G_0$ is isomorphic to $H$?
 Such an isomorphism is illustrated in the following diagram (C highlights the 
 subgraph of B that is isomorphic to A):
-\begin{center}
-\includegraphics{subgraph_isomorphism.png}
-\end{center}
+\begin{figure}[ht]
+\centerline{
+    \includegraphics{subgraph_isomorphism.png}
+}
+\caption{\label{subgraph_isomorphism}
+    Example of a subgraph isomorphism
+}
+\end{figure}
 
 \subsubsection{Frequent Subgraph Mining}
 Another fundamental technique in graphical specification mining is that of
