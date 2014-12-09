@@ -285,30 +285,43 @@ contains a wide array of features, most notably a function to find subgraph
 isomorphisms.
 
 \section{Data Source}
-Due to the large computation time for even moderately sized projects, a test data set of small toy-programs was chosen. Ten sections of example programs were chosen from \url{http://www.tutorialspoint.com/javaexamples/}, a website that hosts example java code showing how to use standard library features.
+Due to the large computation time for even moderately sized projects, a test data set of small toy-programs was chosen. Ten sections of example programs were chosen from \url{http://www.tutorialspoint.com/javaexamples/}, a website that hosts example java code showing how to use standard library features. See Table \ref{program_list} for a list of sections used a a project corpus.
 
-\noindent The following sections were used:
 \begin{table}[ht]
-\begin{tabular}{@{}ll@{}}
-\toprule
-   & Topic           \\ \midrule
-1  & Arrays          \\
-2  & Collections     \\
-3  & Data Structures \\
-4  & Date Time       \\
-5  & Directories     \\
-6  & Files           \\
-7  & Methods         \\
-8  & Networking      \\
-9  & Strings         \\
-10 & Threading       \\ \bottomrule
-\end{tabular}
+\centerline{
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+       & Topic           \\ \midrule
+    1  & Arrays          \\
+    2  & Collections     \\
+    3  & Data Structures \\
+    4  & Date Time       \\
+    5  & Directories     \\
+    6  & Files           \\
+    7  & Methods         \\
+    8  & Networking      \\
+    9  & Strings         \\
+    10 & Threading       \\ \bottomrule
+    \end{tabular}
+}
+\caption{\label{program_list}
+    List of sections used as project corpus
+}
 \end{table}
 
-\noindent For each topic, there are 8-15 examples. For use in this project, this set of files is the ``program'' or ``project'' (e.g. the Array program is a collection of 10 examples showing how to use java arrays). The hope was that programs exercising the standard library would be small enough to be computationally feasible for this project, while still having some number of non-trivial patterns.
+For each topic, there are 8-15 examples. For use in this project, this set of files is the ``program'' or ``project'' (e.g. the Array program is a collection of 10 examples showing how to use java arrays). The hope was that programs exercising the standard library would be small enough to be computationally feasible for this project, while still having some number of non-trivial patterns.
 
 \section{Methodology and Evaluation}
 The following is an outline of the methodology we will use:
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[width=\linewidth]{spec_mining_methodology.png}
+}
+\caption{\label{mining_methodology}
+    Flowchart of methodology used
+}
+\end{figure}
 
 \begin{enumerate}
     \item Obtain a corpus of java programs
@@ -332,24 +345,15 @@ The following is an outline of the methodology we will use:
     \end{enumerate}
 \end{enumerate}
 
-\begin{figure}[ht]
-\centerline{
-\includegraphics[width=\linewidth]{spec_mining_methodology.png}
-}
-\caption{\label{mining_methodology}
-    Flowchart of methodology used
-}
-\end{figure}
-
 \section{Results}
 \subsection{Generating PDGs}
-Running the programs through jpdg produces Program Dependency Graphs as dot files. Since these are at the bytecode level, the PDGS are extremely large even for small projects. Below are examples of two PDGs, each generated from one file inside their respective projects. They are just shown to give a sense of scale, since they are too large for the text to be readable.
+Running the programs through jpdg produces Program Dependency Graphs as dot files. Since these are at the bytecode level, the PDGS are extremely large even for small projects. Figure \ref{reader_pdg} and Figure \ref{server_pdg} are examples of two PDGs, each generated from one file inside their respective projects. They are just shown to give a sense of scale, since they are too large for the text to be readable.
 
 \begin{figure}[ht]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/reader_pdg_full.png}
 }
-\caption{\label{reader_pca}
+\caption{\label{reader_pdg}
     PDG for Reader.java, a file in the File project
 }
 \end{figure}
@@ -452,11 +456,10 @@ Given that we now know what getter/setter patterns look like in java bytecode, w
 \textbf{Threading}       & 43                                                                       & 1:06:26                                                                        & 37                                                                                        & 1:03:39                                                                         & 0.9579                                                                           \\ \hline
 \end{tabular}
 }
+\caption{\label{result_table}
+    Summary of pattern and run time results
+}
 \end{table}
-
-
-%\includegraphics{patterns/reader_getter_isomorphism.png}
-%\includegraphics{patterns/reader_setter_isomorphism.png}
 
 \section{Conclusion}
 pass
