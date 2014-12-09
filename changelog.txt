@@ -1,0 +1,7 @@
+- Made changes to report based on instructor feedback from previous submission
+- Completed literture survey
+- Collected sample programs for evaluation
+- Ran gSpan on sample programs to establish a baseline
+- Added pattern filtering to spec mining process
+- Compared results with baseline
+- Completed final report write-up
