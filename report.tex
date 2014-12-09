@@ -3,6 +3,7 @@
 \usepackage[square,sort,comma,numbers]{natbib}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{float}
 \title{Improving Speed and Interestingness of Graph-Based Specification Mining via Corpus Filtering}
 \author{
     Andrew Mason\\
@@ -312,6 +313,7 @@ Due to the large computation time for even moderately sized projects, a test dat
 For each topic, there are 8-15 examples. For use in this project, this set of files is the ``program'' or ``project'' (e.g. the Array program is a collection of 10 examples showing how to use java arrays). The hope was that programs exercising the standard library would be small enough to be computationally feasible for this project, while still having some number of non-trivial patterns.
 
 \section{Methodology and Evaluation}
+\label{methodology_section}
 The following is an outline of the methodology we will use:
 
 \begin{figure}[ht]
@@ -349,7 +351,7 @@ The following is an outline of the methodology we will use:
 \subsection{Generating PDGs}
 Running the programs through jpdg produces Program Dependency Graphs as dot files. Since these are at the bytecode level, the PDGS are extremely large even for small projects. Figure \ref{reader_pdg} and Figure \ref{server_pdg} are examples of two PDGs, each generated from one file inside their respective projects. They are just shown to give a sense of scale, since they are too large for the text to be readable.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/reader_pdg_full.png}
 }
@@ -359,7 +361,7 @@ Running the programs through jpdg produces Program Dependency Graphs as dot file
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/full_network_small.png}
 }
@@ -371,7 +373,7 @@ Running the programs through jpdg produces Program Dependency Graphs as dot file
 \subsection{Mining Non-trivial Patterns}
 A ``Non-trivial'' pattern is one that represents an actual specification, rather than boilerplate java bytecode that will be included in most java projects. One of the examples used in previous specification mining literature is discovering the pattern of opening and closing sockets in network programming. We therefore expect that gSpan should be able to identify a pattern such as this in the Network project. Observing the patterns found in the Network program, we see that this is the case.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/networking_pattern.png}
 }
@@ -382,7 +384,7 @@ A ``Non-trivial'' pattern is one that represents an actual specification, rather
 
 Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph isomorphism search.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/networking_isomorphism_full.png}
 }
@@ -391,7 +393,7 @@ Revisiting the PDG for Server.java, we can mark the pattern by doing a subgraph 
 }
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/networking_isomorphism_zoomed.png}
 }
@@ -406,7 +408,7 @@ There are many patterns that occur across a large percentage of our program corp
 
 In our test corpus, there were two patterns that were frequent patterns in over 50\% of projects. Looking at these patterns, we can clearly see that they represent a getter and setter.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=7cm]{patterns/reader_getter.png}
 }
@@ -415,7 +417,7 @@ In our test corpus, there were two patterns that were frequent patterns in over 
 }
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=7cm]{patterns/reader_setter.png}
 }
@@ -427,7 +429,7 @@ In our test corpus, there were two patterns that were frequent patterns in over 
 \subsection{Removing Trivial Patterns}
 Revisiting the PDG for Reader.java, we can mark the getter and setter by doing a subgraph isomorphism search for each.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{
 \includegraphics[width=\linewidth]{patterns/reader_getter_isomorphism.png}
 }
@@ -439,6 +441,10 @@ Revisiting the PDG for Reader.java, we can mark the getter and setter by doing a
 Given that we now know what getter/setter patterns look like in java bytecode, we can filter them out from our pattern sets to reduce the number of trivial patterns we return. In fact, since these should always appear as disconnected subgraphs (unlike the socket pattern), we can remove them from future PDGs {\em before} running gSpan, thereby reducing our input size and reducing the number of trivial patterns.
 
 \subsection{Analysis}
+The methodology described in Section \ref{methodology_section} was carried out to generate patterns with and without trivial-pattern filtering on the PDGs. The results of this, in terms of number of patterns found and run time, are shown in Table \ref{result_table}.
+
+As expected, the number of patterns returned by gSpan dropped by the number of trivial-patterns that were in the PDG previously. This is strictly an improvement in terms of pattern interestingness. While the run times were lower on the whole, the margin was very small and is likely just noise. Although we would expect removing subgraphs to improve the run time, the sub graphs that were removed were much smaller than the entire PDGs, representing a small percentage change in overall graph size. We expect that with a larger program corpus, we could find larger trivial patterns that could be removed, representing substantial gains in run time.
+
 \begin{table}[ht]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|l|l|l|l|}
