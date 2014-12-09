@@ -21,7 +21,7 @@
 \section{Introduction}
 Software verification, the ability to prove the correctness of a piece of software \cite{FormalSoftwareVerification}, is an appealing approach to improving software quality. However, the requirement of having formal descriptions of correctness has prevented the widespread use of software verification \cite{Ammons:2002:MS:503272.503275}. \textit{Specification Mining}, as described in \cite{Ammons:2002:MS:503272.503275}, is the machine learning approach to discovering formal specifications for a program interface or an abstract data type. A specification mining tool would reduce the major barrier to program verification by automating the generation of formal specifications.
 
-Our project aims to push forward the current state of specification mining through the application of frequent subgraph mining algorithms to novel intermediate representations of programs.
+Research has been done to apply mining techniques to graphical representations of programs, known as Program Dependency Graphs (PDGs). Our project aims to push forward the current state of graphical specification mining through the application of corpus-based filtering. The idea behind this process is that if a pattern appears in almost every project, it is most likely due to boilerplate bytecode, rather than an interesting specification. We will refer to frequent patterns that appear in a percentage of projects higher than a given threshold as ``trivial''. Frequent patterns that are under the corpus threshold will be referred to as ``non-trivial''. By ignoring patterns that are trivial, we will increase the interestingness of the patterns we return. By greedily removing disconnected trivial patterns from our graph before applying mining algorithms, we can reduce our input size and thereby reduce the running time of our mining algorithms.
 
 \section{Background}
 \subsection{Software Verification}
@@ -353,8 +353,9 @@ The following is an outline of the methodology we will use:
     \item For each java program:
     \begin{enumerate}
         \item Generate the program's PDG via jpdg
-        \item For each pattern with a corpus percentage above some threshold, remove all subgraph isomorphisms from the PDG
+        \item For each pattern with a corpus percentage above some threshold, remove disconnected subgraph isomorphisms from the PDG
         \item Run gSpan on the resulting PDG to discover all patterns at a given support
+        \item Remove any patterns with corpus percentage above some threshold
         \item Record the patterns and run time of gSpan
     \end{enumerate}
 \end{enumerate}
@@ -480,7 +481,7 @@ As expected, the number of patterns returned by gSpan dropped by the number of t
 \end{table}
 
 \section{Conclusion}
-pass
+In this paper we have shown that corpus-based filtering can increase the interestingness of the specifications returned from our frequent subgraph miner (using gSpan + CloseGraph), while offering a potential speedup. Future work would be to use a larger, more realistic corpus of programs on hardware/architecture that could handle the large memory requirements of doing frequent subgraph mining on java bytecode PDGs. We hypothesize that a larger corpus would allow for significant filtering before running gSpan (via subgraph isomorphism matching), thereby substantially reducing run times.
 
 \pagebreak
 \bibliographystyle{acm}
